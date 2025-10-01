@@ -1,1 +1,0 @@
-* 861765b (HEAD -> main, origin/main) Initial commit: added Django backend and logs.txt
