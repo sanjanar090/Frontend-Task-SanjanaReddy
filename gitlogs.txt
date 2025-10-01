@@ -1,0 +1,3 @@
+* f9405b6 (HEAD -> main, origin/main) Added gitlog.txt with commit history
+* aa5ead9 Added API request/response logs
+* 861765b Initial commit: added Django backend and logs.txt
