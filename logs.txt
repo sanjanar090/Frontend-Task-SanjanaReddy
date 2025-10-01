@@ -1,0 +1,144 @@
+=== BACKEND STARTUP (server boot) ===
+Django version 5.2.7, using settings 'backend.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+[01/Oct/2025 22:11:49] "GET / HTTP/1.1" 404 2305
+[01/Oct/2025 22:13:01] "POST /api/auth/register/ HTTP/1.1" 201 54
+[01/Oct/2025 22:14:17] "POST /api/auth/login/ HTTP/1.1" 200 489
+[01/Oct/2025 22:17:11] "GET /api/profile/ HTTP/1.1" 200 81
+[01/Oct/2025 22:19:56] "POST /api/tasks/ HTTP/1.1" 201 182
+[01/Oct/2025 22:20:15] "GET /api/tasks/ HTTP/1.1" 200 182
+[01/Oct/2025 22:20:56] "PATCH /api/tasks/1/ HTTP/1.1" 200 182
+
+---
+
+=== MIGRATIONS & SUPERUSER ===
+Commands executed:
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py createsuperuser
+Superuser created successfully.
+
+---
+
+=== REGISTER USER ===
+Request (POST /api/auth/register/):
+{
+  "username": "testuser",
+  "email": "test@test.com",
+  "password": "testpass123"
+}
+
+Response (201 Created):
+{
+  "id": 2,
+  "username": "testuser",
+  "email": "test@test.com"
+}
+
+---
+
+=== LOGIN USER ===
+Request (POST /api/auth/login/):
+{
+  "username": "testuser",
+  "password": "testpass123"
+}
+
+Response (200 OK):
+{
+  "refresh": "<REFRESH_TOKEN>",
+  "access": "<ACCESS_TOKEN>"
+}
+
+---
+
+=== GET PROFILE ===
+Request (GET /api/profile/)  
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response (200 OK):
+{
+  "id": 2,
+  "user": {
+    "id": 2,
+    "username": "testuser",
+    "email": "test@test.com"
+  },
+  "bio": null
+}
+
+---
+
+=== CREATE TASK ===
+Request (POST /api/tasks/)  
+Header: Authorization: Bearer <ACCESS_TOKEN>  
+{
+  "title": "Finish frontend assignment",
+  "description": "Complete the React frontend for the task manager"
+}
+
+Response (201 Created):
+{
+  "id": 1,
+  "title": "Finish frontend assignment",
+  "description": "Complete the React frontend for the task manager",
+  "completed": false,
+  "created_at": "2025-10-01T16:49:13.310755Z",
+  "user": 2
+}
+
+---
+
+=== LIST TASKS ===
+Request (GET /api/tasks/)  
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response (200 OK):
+[
+  {
+    "id": 1,
+    "title": "Finish frontend assignment",
+    "description": "Complete the React frontend for the task manager",
+    "completed": false,
+    "created_at": "2025-10-01T16:49:13.310755Z",
+    "user": 2
+  }
+]
+
+---
+
+=== UPDATE TASK (PATCH) ===
+Request (PATCH /api/tasks/1/)  
+Header: Authorization: Bearer <ACCESS_TOKEN>  
+{
+  "completed": true
+}
+
+Response (200 OK):
+{
+  "id": 1,
+  "title": "Finish frontend assignment",
+  "description": "Complete the React frontend for the task manager",
+  "completed": true,
+  "created_at": "2025-10-01T16:49:13.310755Z",
+  "user": 2
+}
+
+---
+
+=== DELETE TASK (DELETE) ===
+Request (DELETE /api/tasks/1/)  
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response (204 No Content):
+<empty>
+
+---
+
+=== NOTES ===
+- Backend built with Django REST Framework + SimpleJWT.  
+- Database: SQLite (development).  
+- Authentication: JWT access/refresh tokens.  
+- APIs working: Register, Login, Profile (GET/Update), Task CRUD.  
