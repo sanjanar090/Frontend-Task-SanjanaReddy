@@ -8,6 +8,8 @@
   text-align: center;
   margin-bottom: 30px;
   color: #111827;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .card {
@@ -15,10 +17,11 @@
   padding: 20px;
   margin: 15px 0;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.card h3, .card h4 {
+.card h3,
+.card h4 {
   margin-bottom: 10px;
   color: #2563eb;
 }
@@ -30,6 +33,7 @@ form textarea {
   margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #d1d5db;
+  font-size: 14px;
 }
 
 form textarea {
@@ -46,8 +50,30 @@ form button {
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  transition: background 0.3s;
 }
 
 form button:hover {
   background: #1d4ed8;
+}
+
+.taskList {
+  margin-top: 20px;
+}
+
+.deleteBtn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.deleteBtn:hover {
+  background: #dc2626;
 }
