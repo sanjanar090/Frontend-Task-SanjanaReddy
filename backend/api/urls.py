@@ -1,13 +1,14 @@
-from django.urls import path, include
+from django.urls import path
 from rest_framework.routers import DefaultRouter
-from .views import RegisterView, profile_view, TaskViewSet, LoginView
+from .views import RegisterView, LoginView, profile_view, TaskViewSet
 
 router = DefaultRouter()
-router.register("tasks", TaskViewSet, basename="task")
+router.register(r"tasks", TaskViewSet, basename="task")
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
-    path("login/", LoginView.as_view(), name="login"),   
+    path("login/", LoginView.as_view(), name="login"),
     path("profile/", profile_view, name="profile"),
-    path("", include(router.urls)),
 ]
+
+urlpatterns += router.urls

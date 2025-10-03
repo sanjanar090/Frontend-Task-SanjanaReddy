@@ -9,7 +9,9 @@ function Register() {
     username: "",
     email: "",
     password: "",
+    password2: "",
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,7 +25,18 @@ function Register() {
       alert("Registration successful! Please login.");
       navigate("/login");
     } catch (err) {
-      alert("Error registering user");
+      console.error("Full error object:", err);
+
+      if (err.response) {
+        console.error("Backend error response:", err.response.data);
+        alert("Error registering user: " + JSON.stringify(err.response.data));
+      } else if (err.request) {
+        console.error("No response received:", err.request);
+        alert("No response from server. Check if backend is running.");
+      } else {
+        console.error("Error setting up request:", err.message);
+        alert("Error: " + err.message);
+      }
     }
   };
 
@@ -58,6 +71,14 @@ function Register() {
               onChange={handleChange}
               required
             />
+            <input
+              type="password"
+              name="password2"
+              placeholder="Confirm Password"
+              value={formData.password2}
+              onChange={handleChange}
+              required
+            />
             <button type="submit">Register</button>
           </form>
           <p className={styles.switchText}>
@@ -70,3 +91,4 @@ function Register() {
 }
 
 export default Register;
+ 
